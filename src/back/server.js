@@ -5,7 +5,6 @@ import helmet from 'helmet'
 import chalk from 'chalk'
 import html from './html'
 import render from './render'
-import webpackDevConfig from '../webpack/dev.config'
 
 const log = console.log
 
@@ -33,10 +32,10 @@ export default function makeServer (props) {
     const webpack = require('webpack')
     const webpackDevMiddleware = require('webpack-dev-middleware')
     const webpackHotMiddleware = require('webpack-hot-middleware')
-    const compiler = webpack(webpackDevConfig)
+    const compiler = webpack(props.webpackDevConfig)
 
     app
-      .use(webpackDevMiddleware(compiler, {publicPath: webpackDevConfig.output.publicPath}))
+      .use(webpackDevMiddleware(compiler, {publicPath: props.webpackDevConfig.output.publicPath}))
       .use(webpackHotMiddleware(compiler))
       .get('*', (req, res) => res.status(200).send(template({})))
   }
