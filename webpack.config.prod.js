@@ -1,10 +1,14 @@
 /* global __dirname, require, module */
 
-const webpack = require('webpack')
 const path = require('path')
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const nodeExternals = require('webpack-node-externals')
 
 const config = {
+  mode: 'production',
+  target: 'web',
+  externals: [nodeExternals()],
   entry: path.join(__dirname, '/src/index.js'),
   output: {
     path: path.join(__dirname, '/lib'),
@@ -20,22 +24,77 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
-    new UglifyJsPlugin({include: /\.min\.js$/, minimize: true, compress: {warnings: false}})
+  ]
+}
+
+
+const client = {
+  mode: 'production',
+  context: path.join(__dirname, './src/'),
+  name: 'client',
+  target: 'web',
+  entry: path.join(__dirname, './src/front.js'),
+  output: {
+    path: path.join(__dirname, '/lib'),
+    filename: 'reactOneKitFront.js',
+    library: 'reactOneKitFront',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
+  },
+  module: {
+    rules: [
+      {
+        test: /(\.jsx|\.js)$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/,
+        options: {
+          "presets": ["env", "react"],
+          "plugins": [
+            "transform-runtime",
+            "syntax-dynamic-import",
+            "transform-object-rest-spread",
+            "babel-plugin-transform-class-properties",
+          ],
+        }
+      }
+    ]
+  },
+  plugins: [
+    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
+  ]
+}
+
+const server = {
+  mode: 'production',
+  name: 'server',
+  target: 'node',
+  externals: [nodeExternals()],
+  context: path.join(__dirname, './src/'),
+  entry: path.join(__dirname, './src/server.js'),
+  output: {
+    path: path.join(__dirname, '/lib'),
+    filename: 'reactOneKitBack.js',
+    library: 'reactOneKitBack',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
+  },
+  plugins: [
+    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
   ],
-  externals: {
-    'react': {
-      root: 'React',
-      commonjs2: 'react',
-      commonjs: 'react',
-      amd: 'react'
-    },
-    'react-dom': {
-      root: 'ReactDOM',
-      commonjs2: 'react-dom',
-      commonjs: 'react-dom',
-      amd: 'react-dom'
-    }
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/,
+        options: {
+          'presets': ['env', 'react'],
+          'plugins': [
+              'transform-runtime',
+              'dynamic-import-node',
+              'transform-object-rest-spread',
+              'babel-plugin-transform-class-properties',
+            ],
+        }
+      }
+    ]
   }
 }
 
-module.exports = config
+module.exports = [client, server]

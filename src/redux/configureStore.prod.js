@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
-import {loadState, saveState} from '../localStorage'
+import {loadState, saveState} from './localStorage'
 import throttle from 'lodash/throttle'
 import pick from 'lodash/pick'
 

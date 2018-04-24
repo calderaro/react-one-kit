@@ -1,7 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import window from 'global/window'
-import { loadState, saveState } from '../localStorage'
+import { loadState, saveState } from './localStorage'
 import throttle from 'lodash/throttle'
 import pick from 'lodash/pick'
 import { persistState } from 'redux-devtools'

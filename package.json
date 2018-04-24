@@ -2,9 +2,10 @@
   "name": "react-one-kit",
   "version": "0.0.1",
   "description": "one kit of tools to rule then all",
-  "main": "lib/reactOneKit.js",
+  "main": "entry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production BABEL_ENV=production webpack --config ./webpack.config.prod.js"
   },
   "keywords": [
     "react",
@@ -82,5 +83,5 @@
     "webpack-dev-middleware": "^1.12.2",
     "webpack-hot-middleware": "^2.21.2",
     "webpack-node-externals": "^1.6.0"
-  },
+  }
 }
