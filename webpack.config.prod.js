@@ -18,7 +18,6 @@ const client = {
     connect: path.join(__dirname, '/src/redux/connect.js'),
     localStorage: path.join(__dirname, '/src/redux/localStorage.js'),
     history: path.join(__dirname, '/src/router/history.js'),
-    routerHelpers: path.join(__dirname, '/src/router/rrv4Helpers.js'),
   },
   output: {
     path: path.join(__dirname, '/lib'),
@@ -58,6 +57,7 @@ const server = {
     html: path.join(__dirname, './src/back/html.js'),
     render: path.join(__dirname, './src/back/render.js'),
     server: path.join(__dirname, './src/back/server.js'),
+    routerHelpers: path.join(__dirname, '/src/router/rrv4Helpers.js'),
     babelConfig: path.join(__dirname, './src/webpack/babel.config.js'),
     postcssConfig: path.join(__dirname, './src/webpack/postcss.config.js'),
     webpackDevConfig: path.join(__dirname, './src/webpack/dev.config.js'),
