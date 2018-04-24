@@ -1,11 +1,13 @@
 {
   "name": "react-one-kit",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "one kit of tools to rule then all",
   "main": "entry.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production BABEL_ENV=production webpack --config ./webpack.config.prod.js"
+    "prodbuild": "NODE_ENV=production BABEL_ENV=production webpack --config ./webpack.config.prod.js",
+    "devbuild": "webpack --config ./webpack.config.dev.js",
+    "build": "npm run devbuild && npm run prodbuild"
   },
   "keywords": [
     "react",
