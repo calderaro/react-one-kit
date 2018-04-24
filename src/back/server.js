@@ -3,14 +3,16 @@ import express from 'express'
 import compress from 'compression'
 import helmet from 'helmet'
 import chalk from 'chalk'
+import html from './html'
+import render from './render'
+import webpackDevConfig from '../webpack/dev.config'
 
 const log = console.log
 
 export default function makeServer (props) {
-  const html = require(props.html).default
   const app = express()
   const server = http.createServer(app)
-  const template = html(props.metas)
+  const template = (props.html || html)(props.metas)
 
   app
     .use(helmet())
@@ -18,24 +20,23 @@ export default function makeServer (props) {
     .use('/static', express.static(props.statics))
 
   if (props.NODE_ENV === 'production') {
-    const rootReducer = require(props.rootReducer).default
-    const routes = require(props.routes).default
-    const render = require(props.render).default(routes, rootReducer, template, props.i18n)
+    const rootReducer = props.rootReducer
+    const routes = props.routes
+    const renderer = render(routes, rootReducer, template, props.i18n)
 
     app
       .use('/build', express.static(props.build))
-      .get('*', (req, res) => render(req, res).then(root => res.send(root)))
+      .get('*', (req, res) => renderer(req, res).then(root => res.send(root)))
 
     process.on('SIGINT', () => server.close(err => process.exit(err ? 1 : 0)))
   } else {
     const webpack = require('webpack')
     const webpackDevMiddleware = require('webpack-dev-middleware')
     const webpackHotMiddleware = require('webpack-hot-middleware')
-    const webpackConfig = require(props.webpackConfig)
-    const compiler = webpack(webpackConfig)
+    const compiler = webpack(webpackDevConfig)
 
     app
-      .use(webpackDevMiddleware(compiler, {publicPath: webpackConfig.output.publicPath}))
+      .use(webpackDevMiddleware(compiler, {publicPath: webpackDevConfig.output.publicPath}))
       .use(webpackHotMiddleware(compiler))
       .get('*', (req, res) => res.status(200).send(template({})))
   }
