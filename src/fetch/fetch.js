@@ -8,7 +8,7 @@ const defaultHeaders = {
 const api = (data) => {
   const isObj = Object.prototype.toString.call(data) === '[object Object]'
   const options = isObj ? data : {url: data}
-  const url = options.durl || process.env.api + '/api/' + options.url
+  const url = options.url
   const params = options.params ? qs.stringify(options.params) : ''
   const headers = {
     ...defaultHeaders,
