@@ -59,6 +59,7 @@ const server = {
     server: path.join(__dirname, './src/back/server.js'),
     routerHelpers: path.join(__dirname, '/src/router/rrv4Helpers.js'),
     babelConfig: path.join(__dirname, './src/webpack/babel.config.js'),
+    babelRegister: path.join(__dirname, './src/webpack/babel.register.js'),
     postcssConfig: path.join(__dirname, './src/webpack/postcss.config.js'),
     webpackDevConfig: path.join(__dirname, './src/webpack/dev.config.js'),
     webpackProdConfig: path.join(__dirname, './src/webpack/prod.config.js'),
