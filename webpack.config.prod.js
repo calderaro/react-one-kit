@@ -10,7 +10,6 @@ const client = {
   name: 'client',
   externals: [nodeExternals()],
   entry: {
-    form: path.join(__dirname, '/src/fetch/form.js'),
     app: path.join(__dirname, '/src/front/app.js'),
     localStorage: path.join(__dirname, '/src/redux/localStorage.js'),
     history: path.join(__dirname, '/src/router/history.js'),
@@ -60,6 +59,7 @@ const server = {
     webpackDevConfig: path.join(__dirname, './src/webpack/dev.config.js'),
     webpackProdConfig: path.join(__dirname, './src/webpack/prod.config.js'),
     connect: path.join(__dirname, '/src/redux/connect.js'),
+    form: path.join(__dirname, '/src/fetch/form.js'),
     fetch: path.join(__dirname, '/src/fetch/fetch.js'),
     configureStoreDev: path.join(__dirname, '/src/redux/configureStore.dev.js'),
     configureStore: path.join(__dirname, '/src/redux/configureStore.prod.js')

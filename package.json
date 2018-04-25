@@ -1,6 +1,6 @@
 {
   "name": "react-one-kit",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "one kit of tools to rule then all",
   "main": "entry.js",
   "scripts": {
