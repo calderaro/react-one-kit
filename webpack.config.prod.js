@@ -4,44 +4,6 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 
-const client = {
-  mode: 'production',
-  context: path.join(__dirname, './src/'),
-  name: 'client',
-  externals: [nodeExternals()],
-  entry: {
-    app: path.join(__dirname, '/src/front/app.js'),
-    localStorage: path.join(__dirname, '/src/redux/localStorage.js'),
-    history: path.join(__dirname, '/src/router/history.js'),
-  },
-  output: {
-    path: path.join(__dirname, '/lib'),
-    filename: '[name].js',
-    library: 'reactOneKit',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
-  },
-  module: {
-    rules: [
-      {
-        test: /(\.jsx|\.js)$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/,
-        options: {
-          "presets": ["env", "react"],
-          "plugins": [
-            "transform-runtime",
-            "syntax-dynamic-import",
-            "transform-object-rest-spread",
-            "babel-plugin-transform-class-properties",
-          ],
-        }
-      }
-    ]
-  },
-  plugins: [
-    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
-  ]
-}
-
 const server = {
   mode: 'production',
   name: 'server',
@@ -49,6 +11,10 @@ const server = {
   externals: [nodeExternals()],
   context: path.join(__dirname, './src/'),
   entry: {
+    app: path.join(__dirname, '/src/front/app.js'),
+    localStorage: path.join(__dirname, '/src/redux/localStorage.js'),
+    history: path.join(__dirname, '/src/router/history.js'),
+
     html: path.join(__dirname, './src/back/html.js'),
     render: path.join(__dirname, './src/back/render.js'),
     server: path.join(__dirname, './src/back/server.js'),
@@ -92,4 +58,4 @@ const server = {
   }
 }
 
-module.exports = [client, server]
+module.exports = server
