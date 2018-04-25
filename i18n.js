@@ -3,6 +3,7 @@ const reacti18next = require('react-i18next')
 
 module.exports = {
   i18n,
+  reactI18nextModule: reacti18next.reactI18nextModule
   I18nextProvider: reacti18next.I18nextProvider,
   translate: I18nextProvider.translate
 }
