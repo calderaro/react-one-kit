@@ -1,2 +1,2 @@
-const options = require('./babelConfig')
+const options = require('./babel.config')
 require('babel-register')(options)
