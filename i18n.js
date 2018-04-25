@@ -1,4 +1,4 @@
-const i18n = require('i18n')
+const i18n = require('i18next')
 const reacti18next = require('react-i18next')
 
 module.exports = {
