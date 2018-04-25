@@ -15,7 +15,6 @@ const client = {
     app: path.join(__dirname, '/src/front/app.js'),
     configureStoreDev: path.join(__dirname, '/src/redux/configureStore.dev.js'),
     configureStore: path.join(__dirname, '/src/redux/configureStore.prod.js'),
-    connect: path.join(__dirname, '/src/redux/connect.js'),
     localStorage: path.join(__dirname, '/src/redux/localStorage.js'),
     history: path.join(__dirname, '/src/router/history.js'),
   },
@@ -63,6 +62,7 @@ const server = {
     postcssConfig: path.join(__dirname, './src/webpack/postcss.config.js'),
     webpackDevConfig: path.join(__dirname, './src/webpack/dev.config.js'),
     webpackProdConfig: path.join(__dirname, './src/webpack/prod.config.js'),
+    connect: path.join(__dirname, '/src/redux/connect.js'),
   },
   output: {
     path: path.join(__dirname, '/lib'),
