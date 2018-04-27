@@ -1,3 +1,3 @@
 const NavLink = require('react-router-dom/NavLink')
 
-module.exports = LinkNav
+module.exports = NavLink

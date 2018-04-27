@@ -118,7 +118,7 @@ eval("\n\nmodule.exports = {\n    \"presets\": [\"env\", \"react\"],\n    \"plug
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nmodule.exports = {\n  ident: 'postcss',\n  plugins: function plugins(loader) {\n    return [__webpack_require__(/*! autoprefixer */ \"autoprefixer\")(), __webpack_require__(/*! precss */ \"precss\")()];\n  }\n};\n\n//# sourceURL=webpack://reactOneKit/./webpack/postcss.config.js?");
+eval("\n\nmodule.exports = {\n  ident: 'postcss',\n  plugins: function plugins(loader) {\n    return [__webpack_require__(/*! autoprefixer */ \"autoprefixer\")(), __webpack_require__(/*! precss */ \"precss\")(), __webpack_require__(/*! postcss-nested */ \"postcss-nested\")()];\n  }\n};\n\n//# sourceURL=webpack://reactOneKit/./webpack/postcss.config.js?");
 
 /***/ }),
 
@@ -186,6 +186,17 @@ eval("module.exports = require(\"mini-css-extract-plugin\");\n\n//# sourceURL=we
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"path\");\n\n//# sourceURL=webpack://reactOneKit/external_%22path%22?");
+
+/***/ }),
+
+/***/ "postcss-nested":
+/*!*********************************!*\
+  !*** external "postcss-nested" ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"postcss-nested\");\n\n//# sourceURL=webpack://reactOneKit/external_%22postcss-nested%22?");
 
 /***/ }),
 
