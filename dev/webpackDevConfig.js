@@ -95,7 +95,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nmodule.exports = {\n    \"presets\": [\"env\", \"react\"],\n    \"plugins\": [\"transform-runtime\", \"syntax-dynamic-import\", \"transform-object-rest-spread\", \"babel-plugin-transform-class-properties\", \"react-hot-loader/babel\"]\n};\n\n//# sourceURL=webpack://reactOneKit/./webpack/babel.config.js?");
+eval("\n\nvar env = __webpack_require__(/*! babel-preset-env */ \"babel-preset-env\");\nvar react = __webpack_require__(/*! babel-preset-react */ \"babel-preset-react\");\nvar transformRuntime = __webpack_require__(/*! babel-plugin-transform-runtime */ \"babel-plugin-transform-runtime\");\nvar dynamicImport = __webpack_require__(/*! babel-plugin-syntax-dynamic-import */ \"babel-plugin-syntax-dynamic-import\");\nvar objectRestSpread = __webpack_require__(/*! babel-plugin-transform-object-rest-spread */ \"babel-plugin-transform-object-rest-spread\");\nvar classProperties = __webpack_require__(/*! babel-plugin-transform-class-properties */ \"babel-plugin-transform-class-properties\");\nvar reactHotLoader = __webpack_require__(/*! react-hot-loader/babel */ \"react-hot-loader/babel\");\n\nmodule.exports = {\n    \"presets\": [env, react],\n    \"plugins\": [transformRuntime, dynamicImport, objectRestSpread, classProperties, reactHotLoader.default ? reactHotLoader.default : reactHotLoader]\n};\n\n//# sourceURL=webpack://reactOneKit/./webpack/babel.config.js?");
 
 /***/ }),
 
@@ -107,7 +107,7 @@ eval("\n\nmodule.exports = {\n    \"presets\": [\"env\", \"react\"],\n    \"plug
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _stringify = __webpack_require__(/*! babel-runtime/core-js/json/stringify */ \"babel-runtime/core-js/json/stringify\");\n\nvar _stringify2 = _interopRequireDefault(_stringify);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar path = __webpack_require__(/*! path */ \"path\");\nvar webpack = __webpack_require__(/*! webpack */ \"webpack\");\nvar babelConfig = __webpack_require__(/*! ./babel.config.js */ \"./webpack/babel.config.js\");\nvar postcssConfig = __webpack_require__(/*! ./postcss.config.js */ \"./webpack/postcss.config.js\");\n\nmodule.exports = function createWebpackDevConfig(props) {\n  var projectPath = props.projectPath,\n      clientEntryPath = props.clientEntryPath,\n      clientOutputPath = props.clientOutputPath,\n      api = props.api;\n\n\n  return {\n    mode: 'development',\n    entry: ['react-hot-loader/patch', 'webpack-hot-middleware/client', clientEntryPath],\n    output: {\n      path: clientOutputPath,\n      filename: '[name].js',\n      publicPath: '/static/development/'\n    },\n    plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.DefinePlugin({\n      'process.env': {\n        'NODE_ENV': (0, _stringify2.default)('development'),\n        'target': (0, _stringify2.default)('development'),\n        'targetenv': (0, _stringify2.default)('browser'),\n        'api': (0, _stringify2.default)(api)\n      }\n    })],\n    module: {\n      rules: [{ test: /\\.js$/, loader: 'babel-loader', include: projectPath, options: babelConfig }, { test: /\\.(css)$/,\n        use: ['style-loader', {\n          loader: 'css-loader',\n          options: { modules: true, importLoaders: 1, localIdentName: '[name]__[local]___[hash:base64:5]' }\n        }, { loader: 'postcss-loader', options: postcssConfig }]\n      }]\n    }\n  };\n};\n\n//# sourceURL=webpack://reactOneKit/./webpack/dev.config.js?");
+eval("/* WEBPACK VAR INJECTION */(function(__dirname) {\n\nvar _stringify = __webpack_require__(/*! babel-runtime/core-js/json/stringify */ \"babel-runtime/core-js/json/stringify\");\n\nvar _stringify2 = _interopRequireDefault(_stringify);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar path = __webpack_require__(/*! path */ \"path\");\nvar webpack = __webpack_require__(/*! webpack */ \"webpack\");\nvar babelConfig = __webpack_require__(/*! ./babel.config.js */ \"./webpack/babel.config.js\");\nvar postcssConfig = __webpack_require__(/*! ./postcss.config.js */ \"./webpack/postcss.config.js\");\n\nmodule.exports = function createWebpackDevConfig(props) {\n  var projectPath = props.projectPath,\n      clientEntryPath = props.clientEntryPath,\n      clientOutputPath = props.clientOutputPath,\n      api = props.api;\n\n\n  return {\n    mode: 'development',\n    entry: ['react-hot-loader/patch', 'webpack-hot-middleware/client', clientEntryPath],\n    output: {\n      path: clientOutputPath,\n      filename: '[name].js',\n      publicPath: '/static/development/'\n    },\n    plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.DefinePlugin({\n      'process.env': {\n        'NODE_ENV': (0, _stringify2.default)('development'),\n        'target': (0, _stringify2.default)('development'),\n        'targetenv': (0, _stringify2.default)('browser'),\n        'api': (0, _stringify2.default)(api)\n      }\n    })],\n    module: {\n      rules: [{ test: /\\.js$/, loader: 'babel-loader', include: projectPath, options: babelConfig }, { test: /\\.(css)$/,\n        use: ['style-loader', {\n          loader: 'css-loader',\n          options: { modules: true, importLoaders: 1, localIdentName: '[name]__[local]___[hash:base64:5]' }\n        }, { loader: 'postcss-loader', options: postcssConfig }]\n      }]\n    },\n    resolveLoader: {\n      modules: [path.join(__dirname, '../../node_modules')]\n    },\n    resolve: {\n      alias: {\n        react: path.join(__dirname, '../../node_modules/react'),\n        'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader'),\n        'webpack-hot-middleware': path.join(__dirname, '../../node_modules/webpack-hot-middleware')\n      }\n    }\n  };\n};\n/* WEBPACK VAR INJECTION */}.call(this, \"/\"))\n\n//# sourceURL=webpack://reactOneKit/./webpack/dev.config.js?");
 
 /***/ }),
 
@@ -131,6 +131,72 @@ eval("\n\nmodule.exports = {\n  ident: 'postcss',\n  plugins: function plugins(l
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"autoprefixer\");\n\n//# sourceURL=webpack://reactOneKit/external_%22autoprefixer%22?");
+
+/***/ }),
+
+/***/ "babel-plugin-syntax-dynamic-import":
+/*!*****************************************************!*\
+  !*** external "babel-plugin-syntax-dynamic-import" ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"babel-plugin-syntax-dynamic-import\");\n\n//# sourceURL=webpack://reactOneKit/external_%22babel-plugin-syntax-dynamic-import%22?");
+
+/***/ }),
+
+/***/ "babel-plugin-transform-class-properties":
+/*!**********************************************************!*\
+  !*** external "babel-plugin-transform-class-properties" ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"babel-plugin-transform-class-properties\");\n\n//# sourceURL=webpack://reactOneKit/external_%22babel-plugin-transform-class-properties%22?");
+
+/***/ }),
+
+/***/ "babel-plugin-transform-object-rest-spread":
+/*!************************************************************!*\
+  !*** external "babel-plugin-transform-object-rest-spread" ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"babel-plugin-transform-object-rest-spread\");\n\n//# sourceURL=webpack://reactOneKit/external_%22babel-plugin-transform-object-rest-spread%22?");
+
+/***/ }),
+
+/***/ "babel-plugin-transform-runtime":
+/*!*************************************************!*\
+  !*** external "babel-plugin-transform-runtime" ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"babel-plugin-transform-runtime\");\n\n//# sourceURL=webpack://reactOneKit/external_%22babel-plugin-transform-runtime%22?");
+
+/***/ }),
+
+/***/ "babel-preset-env":
+/*!***********************************!*\
+  !*** external "babel-preset-env" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"babel-preset-env\");\n\n//# sourceURL=webpack://reactOneKit/external_%22babel-preset-env%22?");
+
+/***/ }),
+
+/***/ "babel-preset-react":
+/*!*************************************!*\
+  !*** external "babel-preset-react" ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"babel-preset-react\");\n\n//# sourceURL=webpack://reactOneKit/external_%22babel-preset-react%22?");
 
 /***/ }),
 
@@ -175,6 +241,17 @@ eval("module.exports = require(\"postcss-nested\");\n\n//# sourceURL=webpack://r
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"precss\");\n\n//# sourceURL=webpack://reactOneKit/external_%22precss%22?");
+
+/***/ }),
+
+/***/ "react-hot-loader/babel":
+/*!*****************************************!*\
+  !*** external "react-hot-loader/babel" ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react-hot-loader/babel\");\n\n//# sourceURL=webpack://reactOneKit/external_%22react-hot-loader/babel%22?");
 
 /***/ }),
 

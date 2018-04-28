@@ -4,50 +4,6 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 
-const client = {
-  mode: 'development',
-  context: path.join(__dirname, './src/'),
-  name: 'client',
-  externals: [nodeExternals()],
-  entry: {
-    form: path.join(__dirname, '/src/fetch/form.js'),
-    fetch: path.join(__dirname, '/src/fetch/fetch.js'),
-    app: path.join(__dirname, '/src/front/app.js'),
-    configureStoreDev: path.join(__dirname, '/src/redux/configureStore.dev.js'),
-    configureStore: path.join(__dirname, '/src/redux/configureStore.prod.js'),
-    connect: path.join(__dirname, '/src/redux/connect.js'),
-    localStorage: path.join(__dirname, '/src/redux/localStorage.js'),
-    history: path.join(__dirname, '/src/router/history.js'),
-    routerHelpers: path.join(__dirname, '/src/router/rrv4Helpers.js'),
-  },
-  output: {
-    path: path.join(__dirname, '/dev'),
-    filename: '[name].js',
-    library: 'reactOneKit',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
-  },
-  module: {
-    rules: [
-      {
-        test: /(\.jsx|\.js)$/, loader: 'babel-loader', exclude: /(node_modules|bower_components)/,
-        options: {
-          "presets": ["env", "react"],
-          "plugins": [
-            "transform-runtime",
-            "syntax-dynamic-import",
-            "transform-object-rest-spread",
-            "babel-plugin-transform-class-properties",
-          ],
-        }
-      }
-    ]
-  },
-  plugins: [
-    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
-  ]
-}
-
 const server = {
   mode: 'development',
   name: 'server',
@@ -55,13 +11,24 @@ const server = {
   externals: [nodeExternals()],
   context: path.join(__dirname, './src/'),
   entry: {
+    app: path.join(__dirname, '/src/front/app.js'),
+    localStorage: path.join(__dirname, '/src/redux/localStorage.js'),
+    history: path.join(__dirname, '/src/router/history.js'),
+
     html: path.join(__dirname, './src/back/html.js'),
     render: path.join(__dirname, './src/back/render.js'),
     server: path.join(__dirname, './src/back/server.js'),
+    routerHelpers: path.join(__dirname, '/src/router/rrv4Helpers.js'),
     babelConfig: path.join(__dirname, './src/webpack/babel.config.js'),
+    babelRegister: path.join(__dirname, './src/webpack/babel.register.js'),
     postcssConfig: path.join(__dirname, './src/webpack/postcss.config.js'),
     webpackDevConfig: path.join(__dirname, './src/webpack/dev.config.js'),
     webpackProdConfig: path.join(__dirname, './src/webpack/prod.config.js'),
+    connect: path.join(__dirname, '/src/redux/connect.js'),
+    form: path.join(__dirname, '/src/fetch/form.js'),
+    fetch: path.join(__dirname, '/src/fetch/fetch.js'),
+    configureStoreDev: path.join(__dirname, '/src/redux/configureStore.dev.js'),
+    configureStore: path.join(__dirname, '/src/redux/configureStore.prod.js')
   },
   output: {
     path: path.join(__dirname, '/dev'),
@@ -91,4 +58,4 @@ const server = {
   }
 }
 
-module.exports = [client, server]
+module.exports = server

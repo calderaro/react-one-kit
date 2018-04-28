@@ -43,6 +43,17 @@ module.exports = function createWebpackDevConfig (props) {
           ]
         }
       ]
+    },
+    resolveLoader: {
+      modules: [path.join(__dirname, '../../node_modules')]
+    },
+    resolve: {
+      alias: {
+        react: path.join(__dirname, '../../node_modules/react'),
+        'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader'),
+        'webpack-hot-middleware': path.join(__dirname, '../../node_modules/webpack-hot-middleware'),
+        'babel-loader': path.join(__dirname, '../../node_modules/babel-loader')
+      }
     }
   }
 }

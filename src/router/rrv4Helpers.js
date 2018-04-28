@@ -1,5 +1,5 @@
-import React from 'react';
-import {matchRoutes} from 'react-router-config';
+import React from 'react'
+import {matchRoutes} from 'react-router-config'
 
 /**
  * Returns a new React component, ready to be instantiated.
@@ -7,7 +7,7 @@ import {matchRoutes} from 'react-router-config';
  * instance of Component to the static implementation of `load`.
  */
 export function generateAsyncRouteComponent({ name, loader, Placeholder }) {
-  let Component = null;
+  let Component = null
   return class AsyncRouteComponent extends React.Component {
     /**
      * Static so that you can call load against an uninstantiated version of
@@ -16,21 +16,21 @@ export function generateAsyncRouteComponent({ name, loader, Placeholder }) {
      */
     static load() {
       return loader().then((ResolvedComponent) => {
-        Component = ResolvedComponent.default || ResolvedComponent;
+        Component = ResolvedComponent.default || ResolvedComponent
         return {name, seo: Component.seo}
-      });
+      })
     }
 
     constructor() {
-      super();
-      this.updateState = this.updateState.bind(this);
+      super()
+      this.updateState = this.updateState.bind(this)
       this.state = {
         Component,
-      };
+      }
     }
 
     componentWillMount() {
-      AsyncRouteComponent.load().then(this.updateState);
+      AsyncRouteComponent.load().then(this.updateState)
     }
 
     updateState() {
@@ -39,23 +39,23 @@ export function generateAsyncRouteComponent({ name, loader, Placeholder }) {
       if (this.state.Component !== Component) {
         this.setState({
           Component,
-        });
+        })
       }
     }
 
     render() {
-      const { Component: ComponentFromState } = this.state;
+      const { Component: ComponentFromState } = this.state
       if (ComponentFromState) {
-        return <ComponentFromState {...this.props} />;
+        return <ComponentFromState {...this.props} />
       }
 
       if (Placeholder) {
-        return <Placeholder {...this.props} />;
+        return <Placeholder {...this.props} />
       }
 
-      return null;
+      return null
     }
-  };
+  }
 }
 
 /**
@@ -66,33 +66,33 @@ export function generateAsyncRouteComponent({ name, loader, Placeholder }) {
  * This helps us to make sure all the async code is loaded before rendering.
  */
 export function ensureReady(routeConfig, providedLocation) {
-  const matches = matchRoutes(routeConfig, providedLocation || location.pathname);
+  const matches = matchRoutes(routeConfig, providedLocation || location.pathname)
   return Promise.all(matches.map((match) => {
-    const {component} = match.route;
+    const {component} = match.route
     if (component && component.load) {
-      return component.load();
+      return component.load()
     }
-    return null;
-  }));
+    return null
+  }))
 }
 
 export function convertCustomRouteConfig(customRouteConfig, parentRoute) {
   return customRouteConfig.map((route) => {
     if (typeof route.path === 'function') {
-      const pathResult = route.path(parentRoute || '').replace('//', '/');
+      const pathResult = route.path(parentRoute || '').replace('//', '/')
       return {
         path: pathResult,
         component: route.component,
         exact: route.exact,
         routes: route.routes ? convertCustomRouteConfig(route.routes, pathResult) : [],
-      };
+      }
     }
-    const pathResult = `${parentRoute}${route.path}`;
+    const pathResult = `${parentRoute}${route.path}`
     return {
       path: pathResult,
       component: route.component,
       exact: route.exact,
       routes: route.routes ? convertCustomRouteConfig(route.routes, pathResult) : [],
-    };
-  });
+    }
+  })
 }

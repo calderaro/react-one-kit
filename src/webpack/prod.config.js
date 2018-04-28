@@ -1,10 +1,9 @@
-var path = require('path')
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var nodeExternals = require('webpack-node-externals')
+const path = require('path')
+const webpack = require('webpack')
+const nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const babelConfig = require('./babel.config.js')
+const babelWebConfig = require('./babel.config.js')
+const babelNodeConfig = require('./babel.node.config.js')
 const postcssConfig = require('./postcss.config.js')
 
 module.exports = function createWebpackProdConfig (props) {
@@ -47,11 +46,10 @@ module.exports = function createWebpackProdConfig (props) {
           'api': JSON.stringify(api)
         }
       }),
-      //new BundleAnalyzerPlugin()
     ],
     module: {
       rules: [
-        {test: /\.js$/, loader: 'babel-loader', include: projectPath, options: babelConfig},
+        {test: /\.js$/, loader: 'babel-loader', include: projectPath, options: babelWebConfig},
         {test: /\.(css)$/,
             loader: [
               MiniCssExtractPlugin.loader,
@@ -63,6 +61,15 @@ module.exports = function createWebpackProdConfig (props) {
             ]
         }
       ]
+    },
+    resolveLoader: {
+      modules: [path.join(__dirname, '../../node_modules')]
+    },
+    resolve: {
+      alias: {
+        react: path.join(__dirname, '../../node_modules/react'),
+        'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader')
+      }
     }
   }
 
@@ -91,18 +98,7 @@ module.exports = function createWebpackProdConfig (props) {
     ],
     module: {
       rules: [
-        {
-          test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/,
-          options: {
-            'presets': ['env', 'react'],
-            'plugins': [
-                'transform-runtime',
-                'dynamic-import-node',
-                'transform-object-rest-spread',
-                'babel-plugin-transform-class-properties',
-              ],
-          }
-        },
+        {test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/, options: babelNodeConfig},
         { test: /\.(css)$/,
           use: [
             {
@@ -113,7 +109,18 @@ module.exports = function createWebpackProdConfig (props) {
           ]
         }
       ]
+    },
+    resolveLoader: {
+      modules: [path.resolve(path.join(__dirname, '../../node_modules'))]
+    },
+    resolve: {
+      alias: {
+        react: path.join(__dirname, '../../node_modules/react'),
+        'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader'),
+        'babel-loader': path.join(__dirname, '../../node_modules/babel-loader')
+      }
     }
   }
+
   return [client, server]
 }
