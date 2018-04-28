@@ -63,12 +63,13 @@ module.exports = function createWebpackProdConfig (props) {
       ]
     },
     resolveLoader: {
-      modules: [path.join(__dirname, '../../node_modules')]
+      modules: [path.resolve(path.join(__dirname, '../../node_modules'))]
     },
     resolve: {
       alias: {
         react: path.join(__dirname, '../../node_modules/react'),
-        'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader')
+        'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader'),
+        'babel-loader': path.join(__dirname, '../../node_modules/babel-loader')
       }
     }
   }
