@@ -1,5 +1,5 @@
 const React = require('react')
-const renderToString = require('react-dom').renderToString
+const renderToString = require('react-dom/server').renderToString
 const StaticRouter = require('react-router-dom').StaticRouter
 const Switch = require('react-router-dom').Switch
 const createStore = require('redux').createStore

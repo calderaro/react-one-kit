@@ -68,8 +68,11 @@ module.exports = function createWebpackProdConfig (props) {
     resolve: {
       alias: {
         react: path.join(__dirname, '../../node_modules/react'),
+        redux: path.join(__dirname, '../../node_modules/redux'),
         'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader'),
-        'babel-loader': path.join(__dirname, '../../node_modules/babel-loader')
+        'babel-loader': path.join(__dirname, '../../node_modules/babel-loader'),
+        'react-router-dom': path.join(__dirname, '../../node_modules/react-router-dom'),
+        'react-router': path.join(__dirname, '../../node_modules/react-router'),
       }
     }
   }
@@ -119,7 +122,9 @@ module.exports = function createWebpackProdConfig (props) {
         react: path.join(__dirname, '../../node_modules/react'),
         redux: path.join(__dirname, '../../node_modules/redux'),
         'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader'),
-        'babel-loader': path.join(__dirname, '../../node_modules/babel-loader')
+        'babel-loader': path.join(__dirname, '../../node_modules/babel-loader'),
+        'react-router-dom': path.join(__dirname, '../../node_modules/react-router-dom'),
+        'react-router': path.join(__dirname, '../../node_modules/react-router'),
       }
     }
   }
