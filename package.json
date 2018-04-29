@@ -5,10 +5,7 @@
   "main": "entry.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prodbuild": "NODE_ENV=production BABEL_ENV=production webpack --config ./webpack.config.prod.js",
-    "devbuild": "webpack --config ./webpack.config.dev.js",
-    "build": "npm install && npm run prodbuild",
-    "postinstall": "npm run build"
+    "postinstall": "npm run install"
   },
   "keywords": [
     "react",
