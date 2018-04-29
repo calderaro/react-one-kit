@@ -2,13 +2,14 @@ import React from 'react'
 import {StaticRouter, Route, Switch} from 'react-router-dom'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
 import {ensureReady} from '../router/rrv4Helpers'
 import {renderRoutes} from 'react-router-config';
 import {renderToString} from 'react-dom/server'
 import {I18nextProvider} from 'react-i18next'
 
-export default function createRender (routes, rootReducer, html, i18n) {
+export default function createRender (routes, rootReducerObject, html, i18n) {
+  const rootReducer = combineReducers(rootReducerObject)
   const store = applyMiddleware(thunk)(createStore)(rootReducer)
   return function render(req, res) {
     return ensureReady(routes, req.url).then(splits => {

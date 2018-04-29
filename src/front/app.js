@@ -3,16 +3,17 @@ import {render} from 'react-dom'
 import {Router} from 'react-router-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import configureStore from '../redux/configureStore.prod'
+import {combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 import {ensureReady} from '../router/rrv4Helpers'
 import {renderRoutes} from 'react-router-config'
 import {AppContainer} from 'react-hot-loader'
 import {I18nextProvider} from 'react-i18next'
 
-const createApp = (history, rootReducerPath, i18n, elm = 'root') => {
+const createApp = (history, rootReducerObject, i18n, elm = 'root') => {
   injectTapEventPlugin()
-
-  const store = configureStore(rootReducerPath, window.initialState)
+  const rootReducer = combineReducers(rootReducerObject)
+  const store = configureStore(rootReducer, window.initialState)
 
   const appRender = routes =>
     ensureReady(routes).then(() =>

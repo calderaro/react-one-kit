@@ -11,7 +11,7 @@ const log = console.log
 export default function makeServer (props) {
   const app = express()
   const server = http.createServer(app)
-  const template = (props.html || html)(props.metas)
+  const template = (props.html || html)(props.head)
 
   app
     .use(helmet())
