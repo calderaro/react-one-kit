@@ -1,14 +1,15 @@
-import React from 'react'
-import {render} from 'react-dom'
-import {Router} from 'react-router-dom'
-import injectTapEventPlugin from 'react-tap-event-plugin'
-import configureStore from '../redux/configureStore.prod'
-import {combineReducers} from 'redux'
-import {Provider} from 'react-redux'
-import {ensureReady} from '../router/rrv4Helpers'
-import {renderRoutes} from 'react-router-config'
-import {AppContainer} from 'react-hot-loader'
-import {I18nextProvider} from 'react-i18next'
+const React = require('react')
+const render = require('react-dom').render
+const Router = require('react-router-dom').Router
+const injectTapEventPlugin = require('react-tap-event-plugin')
+const configureStore = require('../redux/configureStore.prod')
+const combineReducers = require('redux').combineReducers
+const Provider = require('react-redux').Provider
+const ensureReady = require('../router/rrv4Helpers').ensureReady
+const renderRoutes = require('react-router-config').renderRoutes
+const AppContainer = require('react-hot-loader').AppContainer
+const I18nextProvider = require('react-i18next').I18nextProvider
+const h = React.createElement
 
 const createApp = (history, rootReducerObject, i18n, elm = 'root') => {
   injectTapEventPlugin()
@@ -18,20 +19,17 @@ const createApp = (history, rootReducerObject, i18n, elm = 'root') => {
   const appRender = routes =>
     ensureReady(routes).then(() =>
       render((
-        <AppContainer>
-          <I18nextProvider i18n={i18n}>
-            <AppContainer>
-              <Provider store={store}>
-                <Router history={history}>
-                  {renderRoutes(routes, {})}
-                </Router>
-              </Provider>
-            </AppContainer>
-          </ I18nextProvider>
-        </AppContainer>
-        ), document.getElementById(elm)))
+        h(AppContainer, null,
+          h(I18nextProvider, {i18n: i18n},
+            h(Provider, {store},
+              h(Router, {history: history},
+                renderRoutes(routes, {})
+              )
+            )
+          )
+        )), document.getElementById(elm)))
 
   return {render: appRender, store}
 }
 
-export default createApp
+module.exports = createApp

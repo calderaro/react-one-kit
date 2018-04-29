@@ -3,6 +3,8 @@ var webpack = require('webpack')
 const babelConfig = require('./babel.config.js')
 const postcssConfig = require('./postcss.config.js')
 
+console.log(path.join(__dirname, '../../node_modules'));
+
 module.exports = function createWebpackDevConfig (props) {
   const {projectPath, clientEntryPath, clientOutputPath, api} = props
 
@@ -50,6 +52,7 @@ module.exports = function createWebpackDevConfig (props) {
     resolve: {
       alias: {
         react: path.join(__dirname, '../../node_modules/react'),
+        redux: path.join(__dirname, '../../node_modules/redux'),
         'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader'),
         'webpack-hot-middleware': path.join(__dirname, '../../node_modules/webpack-hot-middleware'),
         'babel-loader': path.join(__dirname, '../../node_modules/babel-loader')

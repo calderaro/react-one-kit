@@ -1,14 +1,14 @@
-import http from 'http'
-import express from 'express'
-import compress from 'compression'
-import helmet from 'helmet'
-import chalk from 'chalk'
-import html from './html'
-import render from './render'
+const http = require('http')
+const express = require('express')
+const compress = require('compression')
+const helmet = require('helmet')
+const chalk = require('chalk')
+const html = require('./html')
+const render = require('./render')
 
 const log = console.log
 
-export default function makeServer (props) {
+module.exports = function makeServer (props) {
   const app = express()
   const server = http.createServer(app)
   const template = (props.html || html)(props.head)

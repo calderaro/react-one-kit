@@ -1,4 +1,4 @@
-import serialize from 'serialize-javascript'
+const serialize = require('serialize-javascript')
 
 const initialHead = {
   title: '',
@@ -24,7 +24,7 @@ const productionDependencies = `
   <script type='application/javascript' src='${prefix}vendors.js'></script>
 `
 
-export default (initOpts) => {
+module.exports = (initOpts) => {
   const scripts = (initOpts.scripts || []).reduce((a, b) => a + `<script src="${b}"></script>`, '')
   return (props = {}) => {
     const {root, initialState, routerContext, splits} = {...defaultProps, ...props}

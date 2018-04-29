@@ -1,12 +1,13 @@
-import React from 'react'
-import {matchRoutes} from 'react-router-config'
+const React = require('react')
+const matchRoutes = require('react-router-config').matchRoutes
+const h = React.createElement
 
 /**
  * Returns a new React component, ready to be instantiated.
  * Note the closure here protecting Component, and providing a unique
  * instance of Component to the static implementation of `load`.
  */
-export function generateAsyncRouteComponent({ name, loader, Placeholder }) {
+function generateAsyncRouteComponent({ name, loader, Placeholder }) {
   let Component = null
   return class AsyncRouteComponent extends React.Component {
     /**
@@ -44,13 +45,13 @@ export function generateAsyncRouteComponent({ name, loader, Placeholder }) {
     }
 
     render() {
-      const { Component: ComponentFromState } = this.state
+      const ComponentFromState = this.state.Component
       if (ComponentFromState) {
-        return <ComponentFromState {...this.props} />
+        return h(ComponentFromState, this.props, null)
       }
 
       if (Placeholder) {
-        return <Placeholder {...this.props} />
+        return h(Placeholder, this.props, null)
       }
 
       return null
@@ -65,10 +66,10 @@ export function generateAsyncRouteComponent({ name, loader, Placeholder }) {
  *
  * This helps us to make sure all the async code is loaded before rendering.
  */
-export function ensureReady(routeConfig, providedLocation) {
+function ensureReady(routeConfig, providedLocation) {
   const matches = matchRoutes(routeConfig, providedLocation || location.pathname)
   return Promise.all(matches.map((match) => {
-    const {component} = match.route
+    const component = match.route.component
     if (component && component.load) {
       return component.load()
     }
@@ -76,7 +77,7 @@ export function ensureReady(routeConfig, providedLocation) {
   }))
 }
 
-export function convertCustomRouteConfig(customRouteConfig, parentRoute) {
+function convertCustomRouteConfig(customRouteConfig, parentRoute) {
   return customRouteConfig.map((route) => {
     if (typeof route.path === 'function') {
       const pathResult = route.path(parentRoute || '').replace('//', '/')
@@ -96,3 +97,5 @@ export function convertCustomRouteConfig(customRouteConfig, parentRoute) {
     }
   })
 }
+
+module.exports = {convertCustomRouteConfig, ensureReady,  generateAsyncRouteComponent}

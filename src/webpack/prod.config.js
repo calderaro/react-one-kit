@@ -117,6 +117,7 @@ module.exports = function createWebpackProdConfig (props) {
     resolve: {
       alias: {
         react: path.join(__dirname, '../../node_modules/react'),
+        redux: path.join(__dirname, '../../node_modules/redux'),
         'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader'),
         'babel-loader': path.join(__dirname, '../../node_modules/babel-loader')
       }

@@ -1,6 +1,6 @@
-import omit from 'lodash/omit'
+const omit = require('lodash/omit')
 
-export const loadState = () => {
+const loadState = () => {
   try {
     const serialized = localStorage.getItem('store')
 
@@ -28,7 +28,7 @@ export const loadState = () => {
   }
 }
 
-export const saveState = (state) => {
+const saveState = (state) => {
   try {
     const serialized = JSON.stringify(state)
     localStorage.setItem('store', serialized)
@@ -36,3 +36,5 @@ export const saveState = (state) => {
     console.log(err)
   }
 }
+
+module.exports = {loadState, saveState}
