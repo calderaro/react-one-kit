@@ -1,5 +1,5 @@
-import createBrowserHistory from 'history/createBrowserHistory'
+const createBrowserHistory = require('history').createBrowserHistory
 
 const createHistory = process.env.targetenv === 'browser' ? createBrowserHistory() : {}
 
-export default createHistory
+module.exports = createHistory

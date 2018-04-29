@@ -1,11 +1,11 @@
-import 'isomorphic-fetch'
-import qs from 'query-string'
+require('isomorphic-fetch')
+const qs = require('query-string')
 
 const defaultHeaders = {
   'Accept': 'application/json'
 }
 
-const api = (data) => {
+const fetchWrapper = (data) => {
   const isObj = Object.prototype.toString.call(data) === '[object Object]'
   const options = isObj ? data : {url: data}
   const url = options.url
@@ -27,4 +27,4 @@ const api = (data) => {
     })
 }
 
-export default api
+module.exports = fetchWrapper
