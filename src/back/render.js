@@ -20,8 +20,8 @@ module.exports = function createRender (routes, rootReducerObject, html, i18n) {
     return ensureReady(routes, req.url).then(splits => {
       const routerContext = {splitPoints: []}
       const root = renderToString(
-        h(I18nextProvider, {i18n: i18n},
-          h(Provider, {store: stores},
+        h(I18nextProvider, {i18n},
+          h(Provider, {store},
             h(StaticRouter, {context: routerContext, location: req.url},
               h(Switch, null,
                 renderRoutes(routes, {})
