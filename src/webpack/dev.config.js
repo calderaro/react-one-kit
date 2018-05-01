@@ -3,8 +3,6 @@ var webpack = require('webpack')
 const babelConfig = require('./babel.config.js')
 const postcssConfig = require('./postcss.config.js')
 
-console.log(path.join(__dirname, '../../node_modules'));
-
 module.exports = function createWebpackDevConfig (props) {
   const {projectPath, clientEntryPath, clientOutputPath, api} = props
 
@@ -51,11 +49,17 @@ module.exports = function createWebpackDevConfig (props) {
     },
     resolve: {
       alias: {
-        react: path.join(__dirname, '../../node_modules/react'),
-        redux: path.join(__dirname, '../../node_modules/redux'),
+        'react': path.join(__dirname, '../../node_modules/react'),
+        'redux': path.join(__dirname, '../../node_modules/redux'),
         'react-hot-loader': path.join(__dirname, '../../node_modules/react-hot-loader'),
         'webpack-hot-middleware': path.join(__dirname, '../../node_modules/webpack-hot-middleware'),
-        'babel-loader': path.join(__dirname, '../../node_modules/babel-loader')
+        'babel-loader': path.join(__dirname, '../../node_modules/babel-loader'),
+        'react-router-dom': path.join(__dirname, '../../node_modules/react-router-dom'),
+        'react-router': path.join(__dirname, '../../node_modules/react-router'),
+        'global': path.join(__dirname, '../../node_modules/global'),
+        'lodash': path.join(__dirname, '../../node_modules/lodash'),
+        'babel-runtime': path.join(__dirname, '../../node_modules/babel-runtime'),
+        'serialize-javascript': path.join(__dirname, '../../node_modules/serialize-javascript')
       }
     }
   }
